@@ -14,6 +14,8 @@ const burgerControls = (props) => (
 
     <div className = {classes.BurgerControls}>
 
+        <p>Burger Price: <strong> {props.price.toFixed(2)} </strong></p>
+
         {controls.map(control => (
             <BurgerControl 
                 key = {control.label} 
@@ -22,6 +24,11 @@ const burgerControls = (props) => (
                 removed = {() => props.ingredientRemoved(control.type)}
                 disabled = {props.disabled[control.type]} />
         ))}
+        {/* Button for showing modal and Ordering burger */}
+        <button 
+            className={classes.OrderButton}
+            disabled={!props.purchasable}
+            onClick = {props.ordered}>ORDER NOW</button>
 
     </div>
 

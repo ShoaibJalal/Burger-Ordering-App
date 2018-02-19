@@ -2,6 +2,8 @@ import React , {Component, Fragment} from 'react';
 
 import Burger from '../../components/Burger/Burger';
 import BurgerControls from '../../components/Burger/BurgerControls/BurgerControls';
+import Modal from '../../components/UI/Modal/Modal';
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 
 const PRICE_OF_INGREDIENTS = {
     salad: 0.8,
@@ -19,7 +21,20 @@ class BurgerBuilder extends Component {
             cheese: 0,
             meat: 0
         },
-        totalPrice: 2
+        totalPrice: 2,
+        purchasable: false,
+        purchasing: false
+    }
+
+    updatePurchaseState (ingredients) {
+        const sum = Object.keys( ingredients )
+            .map( igKey => {
+                return ingredients[igKey];
+            } )
+            .reduce( ( sum, el ) => {
+                return sum + el;
+            }, 0 );
+        this.setState( { purchasable: sum > 0 } );
     }
     
     addIngredientHander = (type) => {
@@ -33,7 +48,7 @@ class BurgerBuilder extends Component {
         const oldPrice = this.state.totalPrice;
         const updatedPrice = oldPrice + priceAddition;
         this.setState({totalPrice: updatedPrice, ingredients: updatedIngredients});
-
+        this.updatePurchaseState(updatedIngredients);
     };
 
     removeIngredientHandler = (type) => {
@@ -48,9 +63,14 @@ class BurgerBuilder extends Component {
         updatedIngredients[type] = updatedCount;
         const priceSubtraction = PRICE_OF_INGREDIENTS[type];
         const oldPrice = this.state.totalPrice;
-        const updatedPrice = oldPrice + priceSubtraction;
+        const updatedPrice = oldPrice - priceSubtraction;
         this.setState({totalPrice: updatedPrice, ingredients: updatedIngredients});
+        this.updatePurchaseState(updatedIngredients);
     };
+
+    purchaseHandler = () => {
+        this.setState({purchasing: true});
+    }
 
 
     render(){
@@ -62,12 +82,17 @@ class BurgerBuilder extends Component {
         }
         return(
             <Fragment> 
-
+                <Modal display = {this.state.purchasing}>
+                    <OrderSummary ingredients = {this.state.ingredients}/>
+                </Modal>
                 <Burger ingredients = {this.state.ingredients}/>
                 <BurgerControls
                     ingredientAdded = {this.addIngredientHander}
                     ingredientRemoved = {this.removeIngredientHandler}
-                    disabled = {disabledInfo} />
+                    disabled = {disabledInfo}
+                    price = {this.state.totalPrice}
+                    purchasable={this.state.purchasable}
+                    ordered = {this.purchaseHandler} />
 
             </Fragment>
         );
