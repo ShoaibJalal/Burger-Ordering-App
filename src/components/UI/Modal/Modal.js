@@ -1,32 +1,33 @@
-import React, {Component,Fragment} from 'react';
+import React, { Component, Fragment } from 'react';
 
 import classes from './Modal.css';
-import Backdrop from "../Backdrop/Backdrop";
+import Backdrop from '../Backdrop/Backdrop';
 
 class Modal extends Component {
 
-    shouldComponentUpdate(nextProps, nextState){
-        return nextProps.display !== this.props.display || nextProps.children !== this.props.children;
+    shouldComponentUpdate ( nextProps, nextState ) {
+        return nextProps.show !== this.props.show || nextProps.children !== this.props.children;
     }
-    componentWillUpdate(){
-        console.log('Modal component will update.');
+
+    componentWillUpdate () {
+        console.log('[Modal] WillUpdate');
     }
-    render (){
+
+    render () {
         return (
             <Fragment>
-        <Backdrop display = {this.props.display} clicked = {this.props.modalClosed}/>    
-        <div 
-        className = {classes.Modal}
-        style = {{
-            transform: this.props.display ? 'translateY(0)' : 'translateY(-100vh)',
-            opacity: this.props.display ? '1': '0'
-        }}>
-            {this.props.children}
-        </div>
-    </Fragment>
-        );
+                <Backdrop show={this.props.show} clicked={this.props.modalClosed} />
+                <div
+                    className={classes.Modal}
+                    style={{
+                        transform: this.props.show ? 'translateY(0)' : 'translateY(-100vh)',
+                        opacity: this.props.show ? '1' : '0'
+                    }}>
+                    {this.props.children}
+                </div>
+            </Fragment>
+        )
     }
 }
-
 
 export default Modal;

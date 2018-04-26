@@ -1,10 +1,11 @@
-.BurgerControl {
+.BuildControl {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 5px 0;
 }
-.BurgerControl button {
+
+.BuildControl button {
     display: block;
     font: inherit;
     padding: 5px;
@@ -14,14 +15,16 @@
     cursor: pointer;
     outline: none;
 }
-.BurgerControl button:disabled {
+
+
+.BuildControl button:disabled {
     background-color: #AC9980;
     border: 1px solid #7E7365;
     color: #ccc;
     cursor: default;
 }
 
-.BurgerControl button:hover:disabled {
+.BuildControl button:hover:disabled {
     background-color: #AC9980;
     color: #ccc;
     cursor: not-allowed;
@@ -33,22 +36,22 @@
     width: 80px;
 }
 
-.BurgerControl .Remove {  
+.BuildControl .Less {  
     background-color: #D39952;
     color: white;
 }
 
-.BurgerControl .Add {
+.BuildControl .More {
     background-color: #8F5E1E;
     color: white;
 }
 
-.BurgerControl .Remove:hover, .BurgerControl .Remove:active {  
+.BuildControl .Less:hover, .BuildControl .Less:active {  
     background-color: #DAA972;
     color: white;
 }
 
-.BurgerControl .Add:hover,.BurgerControl .Add:active {
+.BuildControl .More:hover,.BuildControl .More:active {
     background-color: #99703F;
     color: white;
 }
