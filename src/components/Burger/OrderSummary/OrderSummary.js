@@ -20,15 +20,15 @@ class OrderSummary extends Component {
 
         return (
             <Fragment>
-              <h3>Your Order</h3>
-              <p>A delicious burger with the following ingredients:</p>
+              <h2>Your Order Summary...</h2>
+              <p>Your burger have following ingredients in it:</p>
               <ul>
                 { ingredientSummary }
               </ul>
               <p><strong>Total Price: { this.props.price.toFixed(2) }</strong></p>
-              <p>Continue to Checkout?</p>
-              <Button btnType="Danger" clicked={ this.props.purchaseCancelled }>CANCEL</Button>
-              <Button btnType="Success" clicked={ this.props.purchaseContinued }>CONTINUE</Button>
+              <p>Do you want to Checkout...?</p>
+              <Button btnType="Danger" clicked={ this.props.purchaseCancelled }>Cancel</Button>
+              <Button btnType="Success" clicked={ this.props.purchaseContinued }>Continue</Button>
             </Fragment>
             );
     }
