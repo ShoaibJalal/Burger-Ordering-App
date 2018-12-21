@@ -6,7 +6,6 @@ import Button from "../../components/UI/Button/Button";
 import classes from "./Auth.css";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import * as actions from "../../store/actions/index";
-import { stat } from "fs";
 
 class Auth extends Component {
   state = {
